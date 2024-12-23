@@ -11,6 +11,7 @@ import com.lv.utils.ThreadLocalUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -110,7 +111,7 @@ public class UserController {
         if (num > 0) {
             return Result.success();
         }
-        return Result.error("用户信息修改shibai");
+        return Result.error("用户信息修改失败");
     }
 
     /**
@@ -138,4 +139,39 @@ public class UserController {
         return Result.error("头像修改失败");
     }
 
+    /**
+     * 修改用户密码
+     * @param params
+     * @return com.lv.pojo.Result
+     * @author gxjh2
+     * @date 2024/12/23 16:14:23
+    */
+    @PatchMapping("/updatePwd")
+    public Result updatePwd(@RequestBody Map<String, String> params) {
+
+        String oldPwd = params.get("oldPwd");//原密码
+        String newPwd = params.get("newPwd");//新密码
+        String confirmPwd = params.get("rePwd");//确认新密码
+
+        //校验必传参数
+        if (StringUtils.isEmpty(oldPwd) || StringUtils.isEmpty(newPwd) || StringUtils.isEmpty(confirmPwd)) {
+            return Result.error("存在必传参数为空");
+        }
+
+        //校验老密码是否正确
+        String username = ThreadLocalUtil.get();
+        User user = userService.findByUsername(username);
+        boolean b = Md5Util.checkPassword(oldPwd, user.getPassword());
+        if (!b) {
+            return Result.error("原密码错误");
+        }
+
+        //校验新密码是否一致
+        if (!newPwd.equals(confirmPwd)) {
+            return Result.error("两次输入密码不一致");
+        }
+
+        userService.updatePwd(user.getId(), newPwd);
+        return Result.success();
+    }
 }

@@ -65,4 +65,10 @@ public class UserServiceImpl implements UserService {
         int i = userMapper.updateUserInfo(userDto);
         return i;
     }
+
+    @Override
+    public void updatePwd(Integer id, String newPwd) {
+        newPwd = Md5Util.getMD5String(newPwd);
+        userMapper.updatePwd(id, newPwd);
+    }
 }

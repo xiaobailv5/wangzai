@@ -3,6 +3,7 @@ package com.lv.pojo.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.groups.Default;
 
 /**
  * @program: wangzai
@@ -69,4 +70,15 @@ public class UserDto {
     public void setUserPic(String userPic) {
         this.userPic = userPic;
     }
+
+
+    public interface Add extends Default {
+
+    }
+
+    public interface Update extends Default {
+
+    }
+
+
 }

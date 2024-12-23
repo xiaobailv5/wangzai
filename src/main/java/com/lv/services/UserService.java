@@ -32,4 +32,14 @@ public interface UserService {
      * @return
      */
     int updateUserInfo(UserDto userDto);
+
+    /**
+     * 修改密码
+     * @param id
+     * @param newPwd
+     * @return void
+     * @author gxjh2
+     * @date 2024/12/23 16:36:07
+    */
+    void updatePwd(Integer id, String newPwd);
 }

@@ -32,4 +32,6 @@ public interface UserMapper {
      * @return
      */
     int updateUserInfo(UserDto userDto);
+
+    void updatePwd(Integer id, String newPwd);
 }
