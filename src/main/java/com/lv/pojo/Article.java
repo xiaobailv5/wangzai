@@ -1,6 +1,8 @@
 package com.lv.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -15,7 +17,9 @@ public class Article implements Serializable {
     private String state;//发布状态 已发布|草稿
     private Integer categoryId;//文章分类id
     private Integer createUser;//创建人ID
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;//创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;//更新时间
 
     public Integer getId() {

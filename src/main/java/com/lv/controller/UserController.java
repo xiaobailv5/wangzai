@@ -88,7 +88,8 @@ public class UserController {
     @GetMapping("/userInfo")
     public Result<User> userInfo(@RequestHeader("Authorization") String token) {
 
-        String username = ThreadLocalUtil.get();
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
         User user = userService.findByUsername(username);
         return Result.success(user);
     }
@@ -123,7 +124,8 @@ public class UserController {
     @PatchMapping("/updateAvatar")
     public Result updateAvatar(@NotNull(message = "头像不能为空") String avatarUrl, @RequestHeader("Authorization") String token) {
 
-        String username = ThreadLocalUtil.get();
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
         User user = userService.findByUsername(username);
 
         if (user == null) {
@@ -159,7 +161,8 @@ public class UserController {
         }
 
         //校验老密码是否正确
-        String username = ThreadLocalUtil.get();
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
         User user = userService.findByUsername(username);
         boolean b = Md5Util.checkPassword(oldPwd, user.getPassword());
         if (!b) {

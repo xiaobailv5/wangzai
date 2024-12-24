@@ -2,6 +2,7 @@ package com.lv.pojo;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -18,7 +19,9 @@ public class User implements Serializable {
     private String nickname;//昵称
     private String email;//邮箱
     private String userPic;//用户头像地址
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;//创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;//更新时间
 
     public Integer getId() {

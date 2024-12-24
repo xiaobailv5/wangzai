@@ -1,16 +1,28 @@
 package com.lv.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.groups.Default;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotNull(message = "分类id不能为空", groups = {Category.Update.class})
     private Integer id;//主键ID
+    @NotEmpty(message = "分类名称不能为空")
     private String categoryName;//分类名称
+    @NotEmpty(message = "分类别名不能为空")
     private String categoryAlias;//分类别名
+    @JsonIgnore
     private Integer createUser;//创建人ID
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;//创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;//更新时间
 
     public Integer getId() {
@@ -71,6 +83,14 @@ public class Category implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
+    }
+
+    public interface Add extends Default {
+
+    }
+
+    public interface Update extends Default {
+
     }
 
 }

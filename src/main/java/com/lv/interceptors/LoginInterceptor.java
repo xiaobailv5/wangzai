@@ -29,8 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //验证token
         try {
             Map<String, Object> claims = JwtUtil.parseToken(token);
-            String username = (String)claims.get("username");
-            ThreadLocalUtil.set(username);
+            ThreadLocalUtil.set(claims);
             //放行
             return true;
         } catch (Exception e) {
