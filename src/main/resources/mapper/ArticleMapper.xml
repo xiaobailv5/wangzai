@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lv.mapper.ArticleMapper">
+
+
+    <insert id="addArticle">
+        INSERT INTO article(title,content,cover_img,state,category_id,create_user,create_time,update_time)
+        VALUES(#{title},#{content},#{coverImg},#{state},#{categoryId},#{createUser},#{createTime},#{updateTime})
+    </insert>
+
+    <update id="updateArticle">
+        UPDATE article
+        set title=#{title},content=#{content},cover_img=#{coverImg},state=#{state},category_id=#{categoryId},update_time=#{updateTime}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteArticle">
+        DELETE FROM article
+        WHERE id=#{id}
+    </delete>
+
+    <select id="queryArticleList" resultType="com.lv.pojo.Article">
+        SELECT id,title,content,cover_img as coverImg,state,category_id as categoryId,create_time as createTime,update_time as updateTime
+        FROM article
+        <where>
+            create_user=#{userId}
+            <if test="categoryId!=null">
+                AND category_id=#{category}
+            </if>
+            <if test="state!=null">
+                AND state=#{state}
+            </if>
+
+        </where>
+    </select>
+    <select id="articleDetail" resultType="com.lv.pojo.Article">
+        SELECT id,title,content,cover_img as coverImg,state,category_id as categoryId,create_time as createTime,update_time as updateTime
+        FROM article
+        WHERE id=#{id}
+    </select>
+
+
+</mapper>

@@ -16,5 +16,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <!-- 使用驼峰命名法转换字段 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
-	
+
+    <!--分页-->
+    <plugins>
+        <!--分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--分页合理化，true开启，如果pageNum<1会查询第一页，如果pageNum>总页数会查询最后一页-->
+            <property name="reasonable" value="true"/>
+            <!--支持通过Mapper接口参数来传递分页参数-->
+            <property name="supportMethodsArguments" value="true"/>
+        </plugin>
+    </plugins>
+
 </configuration>
