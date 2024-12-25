@@ -6,3 +6,24 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# 忽略所有 .class 文件
+*.class
+
+# 忽略 IDE 生成的文件和目录
+.idea/
+*.iml
+out/
+
+# 忽略 Maven 和 Gradle 生成的文件
+target/
+build/
+.gradle/
+
+# 忽略其他常见文件
+*.log
+*.tmp
+*.jar
+*.war
+*.ear
+
