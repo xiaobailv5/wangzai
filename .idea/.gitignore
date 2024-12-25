@@ -13,11 +13,11 @@
 # 忽略 IDE 生成的文件和目录
 .idea/
 *.iml
-out/
+/out/
 
 # 忽略 Maven 和 Gradle 生成的文件
-target/
-build/
+/target/
+/build/
 .gradle/
 
 # 忽略其他常见文件
